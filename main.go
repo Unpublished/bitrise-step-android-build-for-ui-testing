@@ -217,7 +217,7 @@ func mainE(config Configs) error {
 	for _, pth := range exportedArtifactPaths {
 		if strings.HasSuffix(strings.ToLower(path.Base(pth)), strings.ToLower("AndroidTest.apk")) {
 			exportedTestArtifact = pth
-		} else {
+		} else if !strings.Contains(exportedAppArtifact, "x86") {
 			exportedAppArtifact = pth
 		}
 	}
