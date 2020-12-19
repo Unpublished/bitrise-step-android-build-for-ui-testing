@@ -6,12 +6,13 @@ app:
   - BITRISE_STEP_GIT_CLONE_URL: https://github.com/Unpublished/bitrise-step-android-build-for-ui-testing.git
   - BITRISE_SAMPLE_APP: https://github.com/bitrise-io/android-multiple-test-results-sample.git
   - BITRISE_SAMPLE_APP_BRANCH: maintenance
-  - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
+  - BITRISE_GO_PACKAGES: github.com/Unpublished/bitrise-step-android-build-for-ui-testing
+    opts:
+      is_expand: false
 
 workflows:
   go-tests:
     steps:
-    - go-list:
     - golint:
     - errcheck:
         # ubuntu lts stacks have an old go version which causes errcheck command failure
@@ -31,7 +32,6 @@ workflows:
     before_run:
     - audit-this-step
     steps:
-    - go-list:
     - go-test:
     after_run:
     - test_app
